@@ -4,6 +4,27 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+
+        <!-- 버전 정보 -->
+        <VersionPrefix>1.0.0</VersionPrefix>
+        <VersionSuffix></VersionSuffix>
+
+        <!-- NuGet 기본 정보 -->
+        <Title>Azunt.SubcategoryManagement</Title>
+        <Description>Azunt.SubcategoryManagement is a reusable .NET module for managing subcategories in multi-tenant systems. It supports SQL Server and is designed for extensibility with EF Core, Dapper, and ADO.NET.</Description>
+        <PackageTags>Azunt, subcategory, content, multi-tenant, EFCore, Dapper, ADO.NET, Blazor, SQLServer</PackageTags>
+
+        <Authors>VisualAcademy</Authors>
+        <Company>Hawaso</Company>
+
+        <!-- NuGet 링크 및 저장소 -->
+        <PackageProjectUrl>https://github.com/VisualAcademy/Azunt.SubcategoryManagement</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/VisualAcademy/Azunt.SubcategoryManagement</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+
+        <!-- 저작권 정보 -->
+        <Copyright>© 2025 Hawaso. All rights reserved.</Copyright>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,7 +42,6 @@
       <Folder Include="02_Contracts\" />
       <Folder Include="03_Repositories\" />
       <Folder Include="04_Extensions\" />
-      <Folder Include="05_Initializers\" />
     </ItemGroup>
 
 </Project>
