@@ -16,4 +16,12 @@
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="01_Models\" />
+      <Folder Include="02_Contracts\" />
+      <Folder Include="03_Repositories\" />
+      <Folder Include="04_Extensions\" />
+      <Folder Include="05_Initializers\" />
+    </ItemGroup>
+
 </Project>
