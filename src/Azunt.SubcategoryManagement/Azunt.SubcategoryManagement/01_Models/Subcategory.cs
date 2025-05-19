@@ -40,7 +40,7 @@ namespace Azunt.SubcategoryManagement
         /// <summary>
         /// 포스트 이름
         /// </summary>
-        [Required(ErrorMessage = "Name is required.")]
+        //[Required(ErrorMessage = "Name is required.")]
         [StringLength(255, ErrorMessage = "Name cannot exceed 255 characters.")]
         public string? Name { get; set; }
 
@@ -83,8 +83,8 @@ namespace Azunt.SubcategoryManagement
         /// <summary>
         /// [3] Title of the file (required)
         /// </summary>
+        //[Required(ErrorMessage = "Please enter a title.")]
         [MaxLength(255)]
-        [Required(ErrorMessage = "Please enter a title.")]
         [Display(Name = "Title")]
         [Column(TypeName = "NVarChar(255)")]
         public string? Title { get; set; } = string.Empty;

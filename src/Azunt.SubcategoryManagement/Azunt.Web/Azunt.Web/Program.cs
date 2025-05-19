@@ -41,10 +41,16 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
 
-// 포스트 관리: 기본 CRUD 교과서 코드
+
+
+#region Azunt.SubcategoryManagement
 builder.Services.AddDependencyInjectionContainerForSubcategoryApp(connectionString);
 builder.Services.AddTransient<SubcategoryDbContextFactory>();
-//builder.Services.AddScoped<ISubcategoryStorageService, AzureBlobStorageService>();
+builder.Services.AddScoped<ISubcategoryStorageService, Azunt.Web.Components.Pages.Subcategories.Services.AzureBlobStorageService>(); 
+#endregion
+
+
+
 
 var app = builder.Build();
 
