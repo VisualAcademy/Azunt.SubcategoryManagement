@@ -1,0 +1,58 @@
+﻿@namespace Azunt.Web.Components.Pages.Subcategories.Controls
+@using Azunt.SubcategoryManagement
+@inject ISubcategoryRepository SubcategoryRepository
+
+<div>
+    <!-- 드롭다운 리스트 -->
+    <select class="form-control mb-2" @onchange="OnSelectChanged">
+        <option value="">-- Select a Subcategory --</option>
+        @foreach (var subcategory in SubcategoryList)
+        {
+            <option value="@subcategory" selected="@(subcategory == SelectedSubcategory)">
+                @subcategory
+            </option>
+        }
+    </select>
+
+    <!-- 직접 입력용 텍스트박스: 필요없으면 제거 -->
+    <!-- 텍스트박스 입력 시에도 SelectedSubcategoryChanged 호출 -->
+    <input class="form-control" type="text" placeholder="Or type a new subcategory..."
+           @bind="SelectedSubcategory"
+           @oninput="OnInputChanged" />
+</div>
+
+@code {
+    [Parameter]
+    public string SelectedSubcategory { get; set; } = "";
+
+    [Parameter]
+    public EventCallback<string> SelectedSubcategoryChanged { get; set; }
+
+    private List<string> SubcategoryList { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var subcategories = await SubcategoryRepository.GetAllAsync();
+        SubcategoryList = subcategories
+            .Select(d => d.Name ?? "")
+            .Where(n => !string.IsNullOrWhiteSpace(n))
+            .Distinct()
+            .ToList();
+    }
+
+    private async Task OnSelectChanged(ChangeEventArgs e)
+    {
+        var selected = e.Value?.ToString();
+        if (!string.IsNullOrWhiteSpace(selected))
+        {
+            SelectedSubcategory = selected;
+            await SelectedSubcategoryChanged.InvokeAsync(SelectedSubcategory);
+        }
+    }
+
+    private async Task OnInputChanged(ChangeEventArgs e)
+    {
+        SelectedSubcategory = e.Value?.ToString() ?? "";
+        await SelectedSubcategoryChanged.InvokeAsync(SelectedSubcategory);
+    }
+}
