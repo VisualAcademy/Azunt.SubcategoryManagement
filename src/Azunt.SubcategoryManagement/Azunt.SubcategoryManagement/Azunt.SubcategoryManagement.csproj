@@ -36,8 +36,4 @@
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="04_Extensions\" />
-    </ItemGroup>
-
 </Project>

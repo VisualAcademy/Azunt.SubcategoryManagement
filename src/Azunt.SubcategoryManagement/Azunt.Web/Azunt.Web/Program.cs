@@ -14,6 +14,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddControllers();
+
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
@@ -37,6 +39,12 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+
+
+// 포스트 관리: 기본 CRUD 교과서 코드
+builder.Services.AddDependencyInjectionContainerForSubcategoryApp(connectionString);
+builder.Services.AddTransient<SubcategoryDbContextFactory>();
+//builder.Services.AddScoped<ISubcategoryStorageService, AzureBlobStorageService>();
 
 var app = builder.Build();
 
@@ -69,4 +77,7 @@ app.MapRazorComponents<App>()
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
 
+app.MapControllers();
+
 app.Run();
+
