@@ -62,8 +62,33 @@ public partial class SubcategoryList : ComponentBase
     {
         if (firstRender)
         {
-            timeZoneOffsetMinutes = await JSRuntimeInjector.InvokeAsync<int>("Azunt.TimeZone.getLocalOffsetMinutes");
-            StateHasChanged(); // UI에 반영되도록
+            try
+            {
+                await JSRuntimeInjector.InvokeVoidAsync(
+                    "Azunt.UI.applyTruncation",
+                    ".text-truncate-name", 30, 150, true);
+            }
+            catch (JSException jsEx)
+            {
+                Console.Error.WriteLine($"[JSInterop] applyTruncation 호출 실패: {jsEx.Message}");
+                // 로그 저장 또는 Fallback 처리 가능
+            }
+        }
+
+        if (firstRender)
+        {
+            try
+            {
+                timeZoneOffsetMinutes = await JSRuntimeInjector.InvokeAsync<int>(
+                    "Azunt.TimeZone.getLocalOffsetMinutes");
+
+                StateHasChanged();
+            }
+            catch (JSException jsEx)
+            {
+                Console.Error.WriteLine($"[JSInterop] getLocalOffsetMinutes 호출 실패: {jsEx.Message}");
+                timeZoneOffsetMinutes = 0; // fallback to UTC
+            }
         }
     }
 
